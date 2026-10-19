@@ -3,1599 +3,271 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>DSA Daily Tracker</title>
-
+<meta name="theme-color" content="#0b0c0f">
+<title>LabMate — Engineering Student Marketplace</title>
 <style>
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-body{
-    background:#0d1117;
-    color:#e6edf3;
-    font-family:Arial, sans-serif;
-    padding:40px;
-}
-
-.container{
-    max-width:1100px;
-    margin:auto;
-}
-
-/* ==============================
-   NAVIGATION
-============================== */
-
-.nav{
-    display:flex;
-    gap:10px;
-    margin-bottom:30px;
-    border-bottom:1px solid #21262d;
-    padding-bottom:15px;
-}
-
-.nav button{
-    background:#161b22;
-    color:#8b949e;
-    border:1px solid #30363d;
-    padding:9px 16px;
-    border-radius:7px;
-    cursor:pointer;
-    font-size:14px;
-}
-
-.nav button:hover{
-    background:#21262d;
-    color:white;
-}
-
-.nav button.active{
-    color:#58a6ff;
-    border-color:#58a6ff;
-}
-
-/* ==============================
-   PAGES
-============================== */
-
-.page{
-    display:none;
-}
-
-.page.active{
-    display:block;
-}
-
-/* ==============================
-   HEADER
-============================== */
-
-.header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:35px;
-}
-
-.title h1{
-    font-size:28px;
-}
-
-.title p{
-    color:#8b949e;
-    margin-top:6px;
-}
-
-/* ==============================
-   MONTH
-============================== */
-
-.month{
-    display:flex;
-    align-items:center;
-    gap:15px;
-}
-
-.month button{
-    background:#161b22;
-    color:white;
-    border:1px solid #30363d;
-    padding:7px 12px;
-    border-radius:6px;
-    cursor:pointer;
-}
-
-.month button:hover{
-    background:#21262d;
-}
-
-#monthName{
-    font-weight:bold;
-}
-
-/* ==============================
-   STATS
-============================== */
-
-.stats{
-    display:flex;
-    gap:15px;
-    margin-bottom:30px;
-}
-
-.stat{
-    background:#161b22;
-    border:1px solid #30363d;
-    padding:18px 25px;
-    border-radius:8px;
-    min-width:150px;
-}
-
-.stat p{
-    color:#8b949e;
-    font-size:13px;
-    margin-bottom:7px;
-}
-
-.stat h2{
-    font-size:24px;
-}
-
-/* ==============================
-   LEGEND
-============================== */
-
-.legend{
-    display:flex;
-    gap:20px;
-    margin-bottom:18px;
-}
-
-.legend-item{
-    display:flex;
-    align-items:center;
-    gap:7px;
-    font-size:13px;
-    color:#8b949e;
-}
-
-.legend-box{
-    width:13px;
-    height:13px;
-    border-radius:3px;
-}
-
-.green{
-    background:#39d353;
-}
-
-.orange{
-    background:#f0883e;
-}
-
-.blue{
-    background:#58a6ff;
-}
-
-/* ==============================
-   CALENDAR
-============================== */
-
-.calendar{
-    background:#161b22;
-    border:1px solid #30363d;
-    padding:25px;
-    border-radius:10px;
-    overflow-x:auto;
-}
-
-.weekdays{
-    display:grid;
-    grid-template-columns:repeat(7,1fr);
-    gap:7px;
-    margin-bottom:10px;
-}
-
-.weekdays div{
-    text-align:center;
-    color:#8b949e;
-    font-size:12px;
-}
-
-/* ==============================
-   DAYS
-============================== */
-
-.grid{
-    display:grid;
-    grid-template-columns:repeat(7,1fr);
-    gap:7px;
-}
-
-.day{
-    min-height:85px;
-    border:1px solid #30363d;
-    border-radius:6px;
-    padding:7px;
-    background:#0d1117;
-}
-
-.day-number{
-    font-size:12px;
-    color:#8b949e;
-    margin-bottom:8px;
-}
-
-/* ==============================
-   TASK BUTTONS
-============================== */
-
-.tasks{
-    display:flex;
-    gap:5px;
-}
-
-.task{
-    width:19px;
-    height:19px;
-    border-radius:4px;
-    border:1px solid #30363d;
-    cursor:pointer;
-    transition:.15s;
-}
-
-.task:hover{
-    transform:scale(1.1);
-}
-
-.video.active{
-    background:#39d353;
-    border-color:#39d353;
-}
-
-.leetcode.active{
-    background:#f0883e;
-    border-color:#f0883e;
-}
-
-.github.active{
-    background:#58a6ff;
-    border-color:#58a6ff;
-}
-
-/* ==============================
-   EMPTY DAYS
-============================== */
-
-.empty{
-    visibility:hidden;
-}
-
-/* =========================================================
-   DSA TOPICS PAGE
-========================================================= */
-
-.topics-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:25px;
-}
-
-.topics-header h1{
-    font-size:28px;
-}
-
-.topics-header p{
-    color:#8b949e;
-    margin-top:6px;
-}
-
-.add-btn{
-    background:#238636;
-    color:white;
-    border:none;
-    padding:10px 16px;
-    border-radius:7px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-.add-btn:hover{
-    background:#2ea043;
-}
-
-/* ==============================
-   TOPIC PROGRESS
-============================== */
-
-.topic-progress{
-    background:#161b22;
-    border:1px solid #30363d;
-    border-radius:10px;
-    padding:20px;
-    margin-bottom:20px;
-}
-
-.progress-header{
-    display:flex;
-    justify-content:space-between;
-    margin-bottom:12px;
-}
-
-.progress-header span{
-    color:#8b949e;
-}
-
-.progress-bar{
-    width:100%;
-    height:13px;
-    background:#30363d;
-    border-radius:20px;
-    overflow:hidden;
-}
-
-.progress-fill{
-    height:100%;
-    width:0%;
-    background:#58a6ff;
-    transition:.3s;
-}
-
-/* ==============================
-   ADD TOPIC FORM
-============================== */
-
-.add-topic-box{
-    display:none;
-    background:#161b22;
-    border:1px solid #30363d;
-    padding:20px;
-    border-radius:10px;
-    margin-bottom:20px;
-}
-
-.add-topic-box.show{
-    display:block;
-}
-
-.add-topic-box h3{
-    margin-bottom:15px;
-}
-
-.topic-form{
-    display:flex;
-    gap:10px;
-}
-
-.topic-input{
-    flex:1;
-    background:#0d1117;
-    border:1px solid #30363d;
-    color:white;
-    padding:11px;
-    border-radius:7px;
-    outline:none;
-}
-
-.topic-input:focus{
-    border-color:#58a6ff;
-}
-
-.save-topic{
-    background:#58a6ff;
-    color:#0d1117;
-    border:none;
-    padding:10px 18px;
-    border-radius:7px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-.cancel-topic{
-    background:transparent;
-    color:#8b949e;
-    border:1px solid #30363d;
-    padding:10px 15px;
-    border-radius:7px;
-    cursor:pointer;
-}
-
-/* ==============================
-   TOPIC LIST
-============================== */
-
-.topic-list{
-    display:flex;
-    flex-direction:column;
-    gap:9px;
-}
-
-.topic{
-    background:#161b22;
-    border:1px solid #30363d;
-    border-radius:8px;
-    padding:14px 16px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:15px;
-}
-
-.topic-left{
-    display:flex;
-    align-items:center;
-    gap:13px;
-    min-width:0;
-}
-
-/* CHECKBOX */
-
-.topic-checkbox{
-    appearance:none;
-    width:21px;
-    height:21px;
-    min-width:21px;
-    border:2px solid #8b949e;
-    border-radius:5px;
-    cursor:pointer;
-    position:relative;
-}
-
-.topic-checkbox:checked{
-    background:#238636;
-    border-color:#238636;
-}
-
-.topic-checkbox:checked::after{
-    content:"✓";
-    position:absolute;
-    left:3px;
-    top:-2px;
-    color:white;
-    font-size:15px;
-    font-weight:bold;
-}
-
-.topic.completed .topic-name{
-    text-decoration:line-through;
-    color:#6e7681;
-}
-
-.topic-name{
-    word-break:break-word;
-}
-
-/* DELETE */
-
-.delete-btn{
-    background:transparent;
-    border:none;
-    color:#8b949e;
-    cursor:pointer;
-    font-size:17px;
-}
-
-.delete-btn:hover{
-    color:#f85149;
-}
-
-/* EMPTY */
-
-.empty-topics{
-    text-align:center;
-    padding:50px 20px;
-    background:#161b22;
-    border:1px dashed #30363d;
-    border-radius:10px;
-    color:#8b949e;
-}
-
-.empty-topics h3{
-    color:white;
-    margin-bottom:7px;
-}
-
-.empty-icon{
-    font-size:40px;
-    margin-bottom:12px;
-}
-
-/* ==============================
-   MOBILE
-============================== */
-
-@media(max-width:700px){
-
-    body{
-        padding:20px;
-    }
-
-    .nav{
-        overflow-x:auto;
-    }
-
-    .nav button{
-        white-space:nowrap;
-    }
-
-    .header{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:20px;
-    }
-
-    .stats{
-        flex-wrap:wrap;
-    }
-
-    .stat{
-        flex:1;
-        min-width:130px;
-    }
-
-    .topics-header{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:15px;
-    }
-
-    .add-btn{
-        width:100%;
-    }
-
-    .topic-form{
-        flex-direction:column;
-    }
-
-    .save-topic,
-    .cancel-topic{
-        width:100%;
-    }
-
-}
-
+:root{--bg:#0b0c0f;--panel:#14161b;--panel2:#1b1e25;--line:#2c3039;--text:#f4f5f7;--muted:#9da4b1;--lime:#c7f36b;--green:#8fe3b0;--yellow:#f3cb79;--red:#ff8888}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 80% -20%,#263321,transparent 40%),var(--bg);color:var(--text);font:15px/1.55 Inter,system-ui,-apple-system,sans-serif}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1150px;margin:auto;padding:0 22px}
+header{position:sticky;top:0;z-index:10;background:#0b0c0fee;backdrop-filter:blur(14px);border-bottom:1px solid #ffffff12}
+.nav{height:70px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:9px;font-size:21px;font-weight:850;letter-spacing:-.8px}
+.logo{display:grid;place-items:center;width:35px;height:35px;border-radius:11px;background:var(--lime);color:#111;font-weight:950}
+nav{display:flex;gap:23px;color:var(--muted);font-size:13px}
+.actions{display:flex;gap:9px;flex-wrap:wrap}
+.btn{padding:11px 15px;border:1px solid var(--line);border-radius:11px;background:var(--panel2);color:var(--text);font-weight:700;transition:.18s}
+.btn:hover{transform:translateY(-1px);border-color:#646b79}
+.btn.primary{background:var(--lime);border-color:var(--lime);color:#111}
+.btn.small{font-size:12px;padding:7px 10px}
+.btn.danger{color:var(--red)}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:42px;align-items:center;padding:75px 0 60px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--lime);font-size:11px;font-weight:850;letter-spacing:1.3px}
+.dot{height:7px;width:7px;border-radius:50%;background:var(--lime);display:inline-block}
+h1{font-size:clamp(42px,6vw,70px);line-height:1.02;letter-spacing:-3px;margin:19px 0}
+h1 span{color:var(--lime)}
+.hero p,.muted{color:var(--muted)}
+.hero p{font-size:16px;max-width:540px}
+.proof{display:flex;gap:26px;flex-wrap:wrap;margin-top:28px;color:var(--muted);font-size:11px}
+.proof strong{display:block;font-size:19px;color:var(--text)}
+.preview,.card{background:linear-gradient(145deg,#191c22,#111318);border:1px solid var(--line);border-radius:20px;padding:21px}
+.preview{box-shadow:0 25px 80px #0006}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.divider{height:1px;background:var(--line);margin:16px 0}
+.smalltext{font-size:11px;color:var(--muted)}
+.mini{padding:14px;background:#0c0e12;border:1px solid var(--line);border-radius:13px;margin:12px 0}
+.tracker{display:flex;gap:4px;margin-top:17px}
+.tracker div{flex:1;text-align:center;color:#69717e;font-size:10px}
+.tracker i{display:grid;place-items:center;font-style:normal;width:23px;height:23px;border-radius:50%;background:#282d35;margin:0 auto 6px}
+.tracker .done{color:var(--green)}
+.tracker .done i{background:#8fe3b020;color:var(--green)}
+section{padding:43px 0}
+.sectionhead{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:23px}
+h2{font-size:clamp(27px,4vw,37px);line-height:1.15;letter-spacing:-1.2px;margin:8px 0}
+.sectionhead p{color:var(--muted);max-width:560px;margin:0;font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.card h3{font-size:16px;margin:13px 0 6px}
+.card p{font-size:12px;color:var(--muted);margin:0}
+.iconbox{width:43px;height:43px;display:grid;place-items:center;border-radius:13px;background:#c7f36b16;color:var(--lime);font-size:22px}
+.price{font-size:22px;font-weight:850}
+.tag{display:inline-block;font-size:10px;padding:5px 8px;border-radius:7px;background:#252a32;color:#d9dce3}
+.tag.green{background:#163627;color:var(--green)}
+.tag.yellow{background:#382e19;color:var(--yellow)}
+.tag.red{background:#391e21;color:var(--red)}
+.workers{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.avatar{width:47px;height:47px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,var(--lime),#9ab5ff);color:#101114;font-weight:900;flex-shrink:0}
+.worker-top{display:flex;align-items:center;gap:12px}
+.rating{color:var(--lime);font-size:12px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.chip{border:1px solid var(--line);border-radius:7px;padding:4px 7px;color:#bfc4ce;font-size:10px}
+.worker-bottom{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:15px;padding-top:12px;border-top:1px solid var(--line)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
+.steps .card{padding:17px}
+.stepno{font-size:11px;color:var(--lime);font-weight:900}
+.cta{padding:28px;border:1px solid #3a4630;border-radius:20px;background:linear-gradient(110deg,#1b2417,#15191a);display:flex;align-items:center;justify-content:space-between;gap:20px}
+.cta h2{font-size:26px;margin:0 0 7px}
+.cta p{color:var(--muted);font-size:13px;margin:0}
+footer{border-top:1px solid var(--line);margin-top:35px;padding:30px 0 40px;color:var(--muted);font-size:12px}
+.notice{font-size:11px;color:#f2cd87;background:#3a2d171a;border:1px solid #6a522c;border-radius:10px;padding:10px 12px;margin-top:18px}
+.overlay{display:none;position:fixed;inset:0;background:#000b;z-index:50;align-items:center;justify-content:center;padding:15px}
+.overlay.show{display:flex}
+.modal{width:min(680px,100%);max-height:92vh;overflow:auto;background:#13161b;border:1px solid #363b46;border-radius:20px;padding:23px;box-shadow:0 25px 90px #0009}
+.modalhead{display:flex;justify-content:space-between;gap:15px;align-items:flex-start;margin-bottom:19px}
+.modalhead h2{font-size:25px;margin:5px 0}
+.close{width:34px;height:34px;background:transparent;border:1px solid var(--line);border-radius:9px;color:var(--text)}
+.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1/-1}
+.field label{font-size:12px;color:#c6cbd5;font-weight:700}
+.field input,.field select,.field textarea{width:100%;background:#0c0e12;color:var(--text);border:1px solid #363b46;border-radius:10px;padding:11px;outline:none}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--lime)}
+.field textarea{min-height:78px;resize:vertical}
+.modalactions{display:flex;justify-content:flex-end;gap:9px;flex-wrap:wrap;margin-top:18px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:17px}
+.tab{background:transparent;border:1px solid var(--line);border-radius:9px;padding:8px 11px;color:var(--muted)}
+.tab.active{background:var(--lime);border-color:var(--lime);color:#111;font-weight:800}
+.list{display:grid;gap:12px}
+.order{padding:15px;border:1px solid var(--line);border-radius:14px;background:#0d1014}
+.order h3{font-size:15px;margin:0 0 4px}
+.order p{font-size:12px;color:var(--muted);margin:4px 0}
+.orderfoot{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:13px}
+.orderbuttons{display:flex;gap:7px;flex-wrap:wrap}
+.empty{border:1px dashed #414651;padding:24px;text-align:center;color:var(--muted);border-radius:12px}
+.toast{position:fixed;z-index:100;bottom:20px;left:50%;transform:translate(-50%,100px);opacity:0;transition:.25s;background:#e6f7c4;color:#111;padding:12px 17px;border-radius:11px;font-size:13px;font-weight:800;max-width:90vw}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+hr{border:0;border-top:1px solid var(--line);margin:18px 0}
+@media(max-width:800px){.hero{grid-template-columns:1fr;padding-top:45px;gap:28px}.grid,.workers{grid-template-columns:repeat(2,1fr)}nav{display:none}.steps{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:550px){.wrap{padding:0 15px}.nav{height:62px}.nav .btn{font-size:11px;padding:9px}.nav .btn.secondary{display:none}.hero h1{letter-spacing:-2px}.grid,.workers,.steps{grid-template-columns:1fr}.sectionhead{align-items:flex-start;flex-direction:column}.cta{align-items:flex-start;flex-direction:column}.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}.modal{padding:17px}}
 </style>
-
 </head>
-
 <body>
+<header>
+ <div class="wrap nav">
+  <a class="brand" href="#"><span class="logo">L</span> labmate<span style="color:var(--lime)">.</span></a>
+  <nav><a href="#services">Services</a><a href="#workers">Workers</a><a href="#how">How it works</a></nav>
+  <div class="actions">
+   <button class="btn secondary" onclick="openWorker()">Become a worker</button>
+   <button class="btn primary" onclick="openBooking()">Book a service ↗</button>
+  </div>
+ </div>
+</header>
 
-<div class="container">
-
-    <!-- ==============================
-         NAVIGATION
-    ============================== -->
-
-    <div class="nav">
-
-        <button
-            id="trackerNav"
-            class="active"
-            onclick="showPage('trackerPage',this)">
-
-            📅 Daily Tracker
-
-        </button>
-
-        <button
-            id="topicsNav"
-            onclick="showPage('topicsPage',this)">
-
-            📚 DSA Topics
-
-        </button>
-
+<main class="wrap">
+ <section class="hero">
+  <div>
+   <div class="eyebrow"><span class="dot"></span> BUILT FOR ENGINEERING STUDENTS</div>
+   <h1>Less deadline stress.<br><span>More time to build.</span></h1>
+   <p>Discover peer support for practical diagrams, record formatting, project documentation and study help — all in one place.</p>
+   <div class="actions" style="margin-top:24px">
+    <button class="btn primary" onclick="openBooking()">Explore services ↗</button>
+    <button class="btn" onclick="document.querySelector('#workers').scrollIntoView({behavior:'smooth'})">Meet the workers ↓</button>
+   </div>
+   <div class="proof">
+    <div><strong>Student-first</strong>Built for campus life</div>
+    <div><strong>₹99 onwards</strong>Clear pricing</div>
+    <div><strong>Order tracking</strong>Every step visible</div>
+   </div>
+   <div class="notice">Prototype demo only: sample profiles and simulated payments. No real money is collected.</div>
+  </div>
+  <div class="preview">
+   <div class="row"><div><div class="smalltext">ORDER OVERVIEW</div><strong>Order #LM-2048</strong></div><span class="tag green">LIVE DEMO</span></div>
+   <div class="mini">
+    <div class="row"><strong>Digital Logic diagrams</strong><span class="tag yellow">In progress</span></div>
+    <div class="tracker">
+     <div class="done"><i>✓</i>Booked</div>
+     <div class="done"><i>✓</i>Confirmed</div>
+     <div class="done"><i>●</i>Working</div>
+     <div><i>4</i>Delivered</div>
     </div>
-
-
-    <!-- =====================================================
-         DAILY TRACKER PAGE
-    ===================================================== -->
-
-    <div id="trackerPage" class="page active">
-
-        <!-- HEADER -->
-
-        <div class="header">
-
-            <div class="title">
-
-                <h1>DSA Daily Tracker</h1>
-
-                <p>
-                    One video • One LeetCode • One GitHub push
-                </p>
-
-            </div>
-
-            <div class="month">
-
-                <button onclick="previousMonth()">
-                    ‹
-                </button>
-
-                <span id="monthName"></span>
-
-                <button onclick="nextMonth()">
-                    ›
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- STATS -->
-
-        <div class="stats">
-
-            <div class="stat">
-
-                <p>📺 VIDEOS</p>
-
-                <h2 id="videoCount">0</h2>
-
-            </div>
-
-
-            <div class="stat">
-
-                <p>🟧 LEETCODE</p>
-
-                <h2 id="leetcodeCount">0</h2>
-
-            </div>
-
-
-            <div class="stat">
-
-                <p>🔵 GITHUB</p>
-
-                <h2 id="githubCount">0</h2>
-
-            </div>
-
-
-            <div class="stat">
-
-                <p>🔥 PERFECT DAYS</p>
-
-                <h2 id="perfectCount">0</h2>
-
-            </div>
-
-        </div>
-
-
-        <!-- LEGEND -->
-
-        <div class="legend">
-
-            <div class="legend-item">
-
-                <div class="legend-box green"></div>
-
-                Video
-
-            </div>
-
-
-            <div class="legend-item">
-
-                <div class="legend-box orange"></div>
-
-                LeetCode
-
-            </div>
-
-
-            <div class="legend-item">
-
-                <div class="legend-box blue"></div>
-
-                GitHub
-
-            </div>
-
-        </div>
-
-
-        <!-- CALENDAR -->
-
-        <div class="calendar">
-
-            <div class="weekdays">
-
-                <div>Sun</div>
-                <div>Mon</div>
-                <div>Tue</div>
-                <div>Wed</div>
-                <div>Thu</div>
-                <div>Fri</div>
-                <div>Sat</div>
-
-            </div>
-
-
-            <div id="grid" class="grid"></div>
-
-        </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         DSA TOPICS PAGE
-    ===================================================== -->
-
-    <div id="topicsPage" class="page">
-
-        <!-- HEADER -->
-
-        <div class="topics-header">
-
-            <div>
-
-                <h1>📚 DSA Topics</h1>
-
-                <p>
-                    Create your own DSA roadmap and track it.
-                </p>
-
-            </div>
-
-
-            <button
-                class="add-btn"
-                onclick="toggleTopicForm()">
-
-                + Add Topic
-
-            </button>
-
-        </div>
-
-
-        <!-- PROGRESS -->
-
-        <div class="topic-progress">
-
-            <div class="progress-header">
-
-                <strong>DSA Progress</strong>
-
-                <span id="topicProgressText">
-                    0 / 0
-                </span>
-
-            </div>
-
-
-            <div class="progress-bar">
-
-                <div
-                    id="topicProgressFill"
-                    class="progress-fill">
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- ADD TOPIC -->
-
-        <div
-            id="addTopicBox"
-            class="add-topic-box">
-
-            <h3>
-                ➕ Add DSA Topic
-            </h3>
-
-
-            <div class="topic-form">
-
-                <input
-                    id="topicInput"
-                    class="topic-input"
-                    type="text"
-                    maxlength="100"
-                    placeholder="Example: Arrays"
-                    autocomplete="off">
-
-
-                <button
-                    class="save-topic"
-                    onclick="addTopic()">
-
-                    Add
-
-                </button>
-
-
-                <button
-                    class="cancel-topic"
-                    onclick="closeTopicForm()">
-
-                    Cancel
-
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- TOPICS -->
-
-        <div
-            id="topicList"
-            class="topic-list">
-        </div>
-
-    </div>
-
+   </div>
+   <div class="mini">
+    <div class="row"><div><div class="smalltext">ASSIGNED WORKER</div><strong>Priya S. · ★ 4.9</strong></div><div class="avatar">PS</div></div>
+    <div class="divider"></div>
+    <div class="row"><span class="smalltext">Illustrative service price</span><strong style="color:var(--lime)">₹149</strong></div>
+   </div>
+   <div class="row"><span class="smalltext">Order status demo</span><span class="tag green">Trackable</span></div>
+  </div>
+ </section>
+
+ <section id="services">
+  <div class="sectionhead"><div><div class="eyebrow">OUR SERVICES</div><h2>Academic support, made simpler.</h2><p>Choose the support you need, view the price before booking and follow progress from confirmation to delivery.</p></div><button class="btn" onclick="openBooking()">Book a service ↗</button></div>
+  <div class="grid" id="serviceGrid"></div>
+ </section>
+
+ <section id="workers">
+  <div class="sectionhead"><div><div class="eyebrow">COMMUNITY</div><h2>Find your next reliable peer.</h2><p>Worker rankings update using completed orders and customer ratings in this browser demo.</p></div><button class="btn" onclick="openWorker()">+ Create worker profile</button></div>
+  <div class="workers" id="workerGrid"></div>
+ </section>
+
+ <section id="how">
+  <div class="sectionhead"><div><div class="eyebrow">HOW IT WORKS</div><h2>From booking to delivered.</h2></div></div>
+  <div class="steps">
+   <div class="card"><div class="stepno">STEP 01</div><h3>Choose a service</h3><p>Select subject, deadline, worker and requirements.</p></div>
+   <div class="card"><div class="stepno">STEP 02</div><h3>Get your order copy</h3><p>Receive a booking ID and copy your order summary.</p></div>
+   <div class="card"><div class="stepno">STEP 03</div><h3>Track progress</h3><p>See confirmation, in-progress and delivery status updates.</p></div>
+   <div class="card"><div class="stepno">STEP 04</div><h3>Review the service</h3><p>Rate the experience after the order is delivered.</p></div>
+  </div>
+ </section>
+
+ <section>
+  <div class="cta"><div><h2>Have a skill to share?</h2><p>Create a worker profile and get discovered by students.</p></div><button class="btn primary" onclick="openWorker()">Join as a worker ↗</button></div>
+ </section>
+</main>
+
+<footer><div class="wrap row" style="flex-wrap:wrap"><div class="brand"><span class="logo">L</span> labmate.</div><div>Student-to-student academic support · Prototype</div><div>© <span id="year"></span> LabMate</div></div></footer>
+
+<!-- BOOKING MODAL -->
+<div class="overlay" id="bookingModal" role="dialog" aria-modal="true">
+ <div class="modal">
+  <div class="modalhead"><div><div class="eyebrow">NEW REQUEST</div><h2>Book a service</h2><div class="smalltext">Fill in your details and review the demo checkout.</div></div><button class="close" onclick="closeModal('bookingModal')">✕</button></div>
+  <form id="bookingForm">
+   <div class="formgrid">
+    <div class="field"><label for="customerName">Your name *</label><input id="customerName" required maxlength="70" placeholder="Your name"></div>
+    <div class="field"><label for="customerEmail">Email *</label><input id="customerEmail" type="email" required placeholder="you@example.com"></div>
+    <div class="field"><label for="service">Service *</label><select id="service" required></select></div>
+    <div class="field"><label for="worker">Preferred worker</label><select id="worker"><option value="">Auto-assign top available worker</option></select></div>
+    <div class="field"><label for="subject">Subject / branch *</label><input id="subject" required placeholder="e.g. Digital Electronics"></div>
+    <div class="field"><label for="deadline">Deadline *</label><input id="deadline" type="datetime-local" required></div>
+    <div class="field full"><label for="details">Requirements / reference (no sensitive data)</label><textarea id="details" maxlength="1000" placeholder="Explain what help you need. Example: diagram formatting, reference notes, viva support..."></textarea></div>
+   </div>
+   <div class="divider"></div>
+   <div class="row"><div><div class="smalltext">TOTAL — DEMO PRICE</div><strong style="font-size:25px" id="bookingPrice">₹149</strong></div><span class="tag yellow">Fake checkout</span></div>
+   <div class="notice">Demo only. This does not collect money. Use the service for tutoring, formatting, diagram assistance and permitted documentation support—not submitting assessed work as someone else's work.</div>
+   <div class="modalactions"><button type="button" class="btn" onclick="closeModal('bookingModal')">Cancel</button><button type="submit" class="btn primary">Continue to checkout →</button></div>
+  </form>
+ </div>
 </div>
 
+<!-- CHECKOUT MODAL -->
+<div class="overlay" id="checkoutModal" role="dialog" aria-modal="true">
+ <div class="modal">
+  <div class="modalhead"><div><div class="eyebrow">DEMO PAYMENT</div><h2>Confirm your booking</h2><div class="smalltext">Simulated checkout — no real payment occurs.</div></div><button class="close" onclick="closeModal('checkoutModal')">✕</button></div>
+  <div id="checkoutSummary"></div>
+  <div class="card" style="margin-top:15px">
+   <div class="row"><strong>Demo payment method</strong><span class="tag yellow">TEST MODE</span></div>
+   <div class="divider"></div>
+   <label style="display:flex;gap:10px;align-items:center;font-size:13px"><input type="radio" name="fakePay" value="UPI Demo" checked> UPI (simulated)</label>
+   <div style="height:10px"></div>
+   <label style="display:flex;gap:10px;align-items:center;font-size:13px"><input type="radio" name="fakePay" value="Card Demo"> Card (simulated)</label>
+   <div class="notice">Never enter actual card details or a real UPI PIN here.</div>
+  </div>
+  <div class="modalactions"><button class="btn" onclick="closeModal('checkoutModal')">Back</button><button class="btn primary" onclick="completeFakePayment()">Pay ₹<span id="payAmount">149</span> (demo)</button></div>
+ </div>
+</div>
+
+<!-- WORKER PROFILE MODAL -->
+<div class="overlay" id="workerModal" role="dialog" aria-modal="true">
+ <div class="modal">
+  <div class="modalhead"><div><div class="eyebrow">JOIN THE COMMUNITY</div><h2>Create worker profile</h2><div class="smalltext">Your profile will be saved in this browser demo.</div></div><button class="close" onclick="closeModal('workerModal')">✕</button></div>
+  <form id="workerForm">
+   <div class="formgrid">
+    <div class="field"><label for="workerName">Full name *</label><input id="workerName" required maxlength="60"></div>
+    <div class="field"><label for="workerBranch">Branch / course *</label><input id="workerBranch" required placeholder="e.g. Diploma CSE"></div>
+    <div class="field"><label for="workerCollege">College (optional)</label><input id="workerCollege" maxlength="90" placeholder="College name"></div>
+    <div class="field"><label for="workerRate">Starting price (₹) *</label><input id="workerRate" type="number" min="49" max="5000" value="99" required></div>
+    <div class="field full"><label for="workerSkills">Skills / services *</label><input id="workerSkills" required placeholder="e.g. diagrams, formatting, tutoring"></div>
+    <div class="field full"><label for="workerBio">Short bio</label><textarea id="workerBio" maxlength="350" placeholder="Describe your skills and availability"></textarea></div>
+   </div>
+   <div class="notice">Demo profile only. Don't publish private contact details. Real worker verification and payments require a secure backend.</div>
+   <div class="modalactions"><button type="button" class="btn" onclick="closeModal('workerModal')">Cancel</button><button class="btn primary" type="submit">Create profile</button></div>
+  </form>
+ </div>
+</div>
+
+<!-- ORDER DASHBOARD -->
+<div class="overlay" id="ordersModal" role="dialog" aria-modal="true">
+ <div class="modal">
+  <div class="modalhead"><div><div class="eyebrow">YOUR DEMO DASHBOARD</div><h2>Orders & status</h2><div class="smalltext">Saved orders from this browser are shown here.</div></div><button class="close" onclick="closeModal('ordersModal')">✕</button></div>
+  <div class="tabs"><button class="tab active" data-tab="customer" onclick="setTab('customer')">Customer view</button><button class="tab" data-tab="worker" onclick="setTab('worker')">Worker / admin view</button></div>
+  <div id="orderList" class="list"></div>
+  <div class="notice">Status changes are local to this browser. Multi-device real-time tracking needs a shared database and backend.</div>
+ </div>
+</div>
+
+<!-- REVIEW MODAL -->
+<div class="overlay" id="reviewModal" role="dialog" aria-modal="true">
+ <div class="modal">
+  <div class="modalhead"><div><div class="eyebrow">YOUR FEEDBACK</div><h2>Rate your experience</h2></div><button class="close" onclick="closeModal('reviewModal')">✕</button></div>
+  <form id="reviewForm">
+   <input type="hidden" id="reviewOrderId">
+   <div class="field"><label for="reviewRating">Rating</label><select id="reviewRating"><option value="5">★★★★★ — Excellent</option><option value="4">★★★★☆ — Good</option><option value="3">★★★☆☆ — Okay</option><option value="2">★★☆☆☆ — Poor</option><option value="1">★☆☆☆☆ — Very poor</option></select></div>
+   <div class="field" style="margin-top:12px"><label for="reviewText">Feedback</label><textarea id="reviewText" maxlength="300" placeholder="Share feedback"></textarea></div>
+   <div class="modalactions"><button class="btn primary" type="submit">Submit review</button></div>
+  </form>
+ </div>
+</div>
+<div class="toast" id="toast"></div>
 
 <script>
-
-/* =========================================================
-   DAILY TRACKER
-========================================================= */
-
-/* CURRENT MONTH */
-
-let currentDate = new Date();
-
-let currentMonth =
-    currentDate.getMonth();
-
-let currentYear =
-    currentDate.getFullYear();
-
-
-/* STORAGE */
-
-let data =
-    JSON.parse(
-        localStorage.getItem("dsaTracker")
-    ) || {};
-
-
-/* SAVE */
-
-function save(){
-
-    localStorage.setItem(
-        "dsaTracker",
-        JSON.stringify(data)
-    );
-
-}
-
-
-/* DATE KEY */
-
-function getKey(year,month,day){
-
-    return `${year}-${month+1}-${day}`;
-
-}
-
-
-/* RENDER */
-
-function render(){
-
-    const grid =
-        document.getElementById("grid");
-
-    grid.innerHTML="";
-
-
-    const date =
-        new Date(
-            currentYear,
-            currentMonth,
-            1
-        );
-
-
-    const firstDay =
-        date.getDay();
-
-
-    const days =
-        new Date(
-            currentYear,
-            currentMonth + 1,
-            0
-        ).getDate();
-
-
-    /* MONTH NAME */
-
-    document.getElementById(
-        "monthName"
-    ).textContent =
-        date.toLocaleString(
-            "default",
-            {
-                month:"long",
-                year:"numeric"
-            }
-        );
-
-
-    /* EMPTY CELLS */
-
-    for(let i=0;i<firstDay;i++){
-
-        const empty =
-            document.createElement("div");
-
-        empty.className="day empty";
-
-        grid.appendChild(empty);
-
-    }
-
-
-    /* DAYS */
-
-    for(let day=1;day<=days;day++){
-
-        const key =
-            getKey(
-                currentYear,
-                currentMonth,
-                day
-            );
-
-
-        if(!data[key]){
-
-            data[key]={
-                video:false,
-                leetcode:false,
-                github:false
-            };
-
-        }
-
-
-        const cell =
-            document.createElement("div");
-
-        cell.className="day";
-
-
-        /* DATE */
-
-        const number =
-            document.createElement("div");
-
-        number.className="day-number";
-
-        number.textContent=day;
-
-        cell.appendChild(number);
-
-
-        /* TASKS */
-
-        const tasks =
-            document.createElement("div");
-
-        tasks.className="tasks";
-
-
-        const video =
-            createTask(
-                "video",
-                "📺 Video",
-                key
-            );
-
-
-        const leetcode =
-            createTask(
-                "leetcode",
-                "🧩 LeetCode",
-                key
-            );
-
-
-        const github =
-            createTask(
-                "github",
-                "🐙 GitHub",
-                key
-            );
-
-
-        tasks.appendChild(video);
-        tasks.appendChild(leetcode);
-        tasks.appendChild(github);
-
-        cell.appendChild(tasks);
-
-        grid.appendChild(cell);
-
-    }
-
-
-    updateStats();
-
-}
-
-
-/* CREATE TASK */
-
-function createTask(type,title,key){
-
-    const el =
-        document.createElement("div");
-
-    el.className =
-        `task ${type}`;
-
-
-    if(data[key][type]){
-
-        el.classList.add("active");
-
-    }
-
-
-    el.title=title;
-
-
-    el.onclick=function(){
-
-        data[key][type] =
-            !data[key][type];
-
-        save();
-
-        render();
-
-    };
-
-
-    return el;
-
-}
-
-
-/* STATS */
-
-function updateStats(){
-
-    let videos=0;
-    let leetcode=0;
-    let github=0;
-    let perfect=0;
-
-
-    Object.keys(data).forEach(key=>{
-
-        const d=data[key];
-
-
-        if(
-            key.startsWith(
-                `${currentYear}-${currentMonth+1}-`
-            )
-        ){
-
-            if(d.video)
-                videos++;
-
-            if(d.leetcode)
-                leetcode++;
-
-            if(d.github)
-                github++;
-
-            if(
-                d.video &&
-                d.leetcode &&
-                d.github
-            ){
-
-                perfect++;
-
-            }
-
-        }
-
-    });
-
-
-    document.getElementById(
-        "videoCount"
-    ).textContent=videos;
-
-
-    document.getElementById(
-        "leetcodeCount"
-    ).textContent=leetcode;
-
-
-    document.getElementById(
-        "githubCount"
-    ).textContent=github;
-
-
-    document.getElementById(
-        "perfectCount"
-    ).textContent=perfect;
-
-}
-
-
-/* MONTH NAVIGATION */
-
-function previousMonth(){
-
-    currentMonth--;
-
-    if(currentMonth<0){
-
-        currentMonth=11;
-        currentYear--;
-
-    }
-
-    render();
-
-}
-
-
-function nextMonth(){
-
-    currentMonth++;
-
-    if(currentMonth>11){
-
-        currentMonth=0;
-        currentYear++;
-
-    }
-
-    render();
-
-}
-
-
-/* =========================================================
-   PAGE NAVIGATION
-========================================================= */
-
-function showPage(pageId,button){
-
-    document
-        .querySelectorAll(".page")
-        .forEach(page=>{
-
-            page.classList.remove("active");
-
-        });
-
-
-    document
-        .getElementById(pageId)
-        .classList.add("active");
-
-
-    document
-        .querySelectorAll(".nav button")
-        .forEach(btn=>{
-
-            btn.classList.remove("active");
-
-        });
-
-
-    button.classList.add("active");
-
-
-    if(pageId==="topicsPage"){
-
-        renderTopics();
-
-    }
-
-}
-
-
-/* =========================================================
-   DSA TOPICS
-========================================================= */
+"use strict";
 
 /*
-    Topics use a SEPARATE localStorage key:
-
-    dsaTopics
-
-    Therefore your existing daily tracker data
-    stored in "dsaTracker" remains untouched.
-*/
-
-let topics =
-    JSON.parse(
-        localStorage.getItem("dsaTopics")
-    ) || [];
-
-
-/* SAVE TOPICS */
-
-function saveTopics(){
-
-    localStorage.setItem(
-        "dsaTopics",
-        JSON.stringify(topics)
-    );
-
-}
-
-
-/* OPEN / CLOSE FORM */
-
-function toggleTopicForm(){
-
-    const box =
-        document.getElementById(
-            "addTopicBox"
-        );
-
-
-    box.classList.toggle("show");
-
-
-    if(box.classList.contains("show")){
-
-        document
-            .getElementById("topicInput")
-            .focus();
-
-    }
-
-}
-
-
-function closeTopicForm(){
-
-    document
-        .getElementById("addTopicBox")
-        .classList.remove("show");
-
-
-    document
-        .getElementById("topicInput")
-        .value="";
-
-}
-
-
-/* ADD TOPIC */
-
-function addTopic(){
-
-    const input =
-        document.getElementById(
-            "topicInput"
-        );
-
-
-    const name =
-        input.value.trim();
-
-
-    if(!name){
-
-        alert("Enter a topic name.");
-
-        input.focus();
-
-        return;
-
-    }
-
-
-    /* DUPLICATE CHECK */
-
-    const exists =
-        topics.some(
-            topic =>
-                topic.name.toLowerCase() ===
-                name.toLowerCase()
-        );
-
-
-    if(exists){
-
-        alert("This topic already exists.");
-
-        input.focus();
-
-        return;
-
-    }
-
-
-    /* CREATE TOPIC */
-
-    topics.push({
-
-        id:Date.now(),
-
-        name:name,
-
-        completed:false
-
-    });
-
-
-    saveTopics();
-
-
-    input.value="";
-
-
-    closeTopicForm();
-
-
-    renderTopics();
-
-}
-
-
-/* TOGGLE TOPIC */
-
-function toggleTopic(id){
-
-    const topic =
-        topics.find(
-            topic => topic.id === id
-        );
-
-
-    if(!topic)
-        return;
-
-
-    topic.completed =
-        !topic.completed;
-
-
-    saveTopics();
-
-
-    renderTopics();
-
-}
-
-
-/* DELETE TOPIC */
-
-function deleteTopic(id){
-
-    const topic =
-        topics.find(
-            topic => topic.id === id
-        );
-
-
-    if(!topic)
-        return;
-
-
-    if(
-        !confirm(
-            `Delete "${topic.name}"?`
-        )
-    ){
-
-        return;
-
-    }
-
-
-    topics =
-        topics.filter(
-            topic => topic.id !== id
-        );
-
-
-    saveTopics();
-
-
-    renderTopics();
-
-}
-
-
-/* ESCAPE HTML */
-
-function escapeHTML(text){
-
-    const div =
-        document.createElement("div");
-
-    div.textContent=text;
-
-    return div.innerHTML;
-
-}
-
-
-/* RENDER TOPICS */
-
-function renderTopics(){
-
-    const list =
-        document.getElementById(
-            "topicList"
-        );
-
-
-    const progressText =
-        document.getElementById(
-            "topicProgressText"
-        );
-
-
-    const progressFill =
-        document.getElementById(
-            "topicProgressFill"
-        );
-
-
-    /* EMPTY */
-
-    if(topics.length===0){
-
-        list.innerHTML=`
-
-            <div class="empty-topics">
-
-                <div class="empty-icon">
-                    📚
-                </div>
-
-                <h3>
-                    No DSA Topics Yet
-                </h3>
-
-                <p>
-                    Add your first topic to start
-                    building your roadmap.
-                </p>
-
-            </div>
-
-        `;
-
-
-        progressText.textContent="0 / 0";
-
-        progressFill.style.width="0%";
-
-        return;
-
-    }
-
-
-    /* PROGRESS */
-
-    const completed =
-        topics.filter(
-            topic => topic.completed
-        ).length;
-
-
-    const total =
-        topics.length;
-
-
-    const percentage =
-        Math.round(
-            (completed / total) * 100
-        );
-
-
-    progressText.textContent =
-        `${completed} / ${total}`;
-
-
-    progressFill.style.width =
-        percentage + "%";
-
-
-    /* LIST */
-
-    list.innerHTML =
-        topics.map(topic=>`
-
-            <div
-                class="topic
-                ${topic.completed
-                    ? "completed"
-                    : ""}">
-
-                <div class="topic-left">
-
-                    <input
-                        type="checkbox"
-                        class="topic-checkbox"
-                        ${topic.completed
-                            ? "checked"
-                            : ""}
-                        onchange="
-                            toggleTopic(${topic.id})
-                        ">
-
-                    <span class="topic-name">
-                        ${escapeHTML(topic.name)}
-                    </span>
-
-                </div>
-
-
-                <button
-                    class="delete-btn"
-                    onclick="
-                        deleteTopic(${topic.id})
-                    "
-                    title="Delete topic">
-
-                    🗑️
-
-                </button>
-
-            </div>
-
-        `).join("");
-
-}
-
-
-/* ENTER KEY */
-
-document
-    .getElementById("topicInput")
-    .addEventListener(
-        "keydown",
-        function(event){
-
-            if(event.key==="Enter"){
-
-                addTopic();
-
-            }
-
-        }
-    );
-
-
-/* =========================================================
-   START
-========================================================= */
-
-render();
-
-renderTopics();
-
-</script>
-
-</body>
-</html>
+ LABMATE SINGLE-FILE PROTOTYPE
+ - Saves demo data to localStorage.
+ - Simulates checkout. No real payments are processed.
+ - Status updates are local to this browser, not cross-device real-time.
+ - Production needs a backend, authentication, payment verification,
+   access controls, secure file storage and marketplace payment approval.
